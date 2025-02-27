@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゲンキーシミュレーター</title>
+    <link rel="stylesheet" href="style.css">
+
+
+    <!-- Chart.js 読み込み -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ゲンキーシミュレーター</h1>
+
+        <div class="form-container">
+            <label>月収（円）:</label>
+            <select id="income" onchange="calculateBudget()">
+                <option value="235000">AC：235,000円</option>
+                <option value="291000">チーフ（仮）:291,000円</option>
+                <option value="330000">チーフ（本）:330,000円</option>                
+                <option value="375000">係長格:375,000円</option>
+                <option value="458000">課長格:458,000円</option>
+                <option value="608000">次長格:608,000円</option>
+                <option value="708000">部長格:708,000円</option>
+            </select>
+
+            <div class="slider-container">
+                <label>住居費（円） (平均: 50,000円): <span id="rentValue">50,000</span>円</label>
+                <input type="range" id="rent" min="0" max="100000" step="1000" value="50000" oninput="updateSlider('rent')">
+            </div>
+
+<div class="slider-container">
+    <label>消耗品（円） (平均: 10,000円): <span id="suppliesValue">10,000</span>円</label>
+    <input type="range" id="supplies" min="0" max="50000" step="1000" value="10000" oninput="updateSlider('supplies')">
+</div>
+
+<div class="slider-container">
+    <label>水道光熱費（円） (平均: 15,000円): <span id="utilitiesValue">15,000</span>円</label>
+    <input type="range" id="utilities" min="0" max="50000" step="1000" value="15000" oninput="updateSlider('utilities')">
+</div>
+
+            <div class="slider-container">
+                <label>食費（円） (平均: 30,000円): <span id="foodValue">30,000</span>円</label>
+                <input type="range" id="food" min="0" max="100000" step="1000" value="30000" oninput="updateSlider('food')">
+            </div>
+
+            <div class="slider-container">
+                <label>通信費（円） (平均: 10,000円): <span id="internetValue">10,000</span>円</label>
+                <input type="range" id="internet" min="0" max="60000" step="1000" value="10000" oninput="updateSlider('internet')">
+            </div>
+
+            <div class="slider-container">
+                <label>交通費（円） (平均: 15,000円): <span id="transportationValue">15,000</span>円</label>
+                <input type="range" id="transportation" min="0" max="50000" step="1000" value="15000" oninput="updateSlider('transportation')">
+            </div>
+
+            <div class="slider-container">
+                <label>被服費（円） (平均: 10,000円): <span id="clothingValue">10,000</span>円</label>
+                <input type="range" id="clothing" min="0" max="150000" step="1000" value="10000" oninput="updateSlider('clothing')">
+            </div>
+
+<div class="slider-container">
+    <label>娯楽費（円） (平均: 20,000円): <span id="entertainmentValue">20,000</span>円</label>
+    <input type="range" id="entertainment" min="0" max="150000" step="1000" value="20000" oninput="updateSlider('entertainment')">
+</div>  
+
+<div class="slider-container">
+    <label>その他（円）: <span id="otherValue">0</span>円</label>
+    <input type="range" id="other" min="0" max="200000" step="1000" value="0" oninput="updateSlider('other')">
+</div>
+
+  
+
+            </div>
+            
+
+
+
+<div class="result-container">
+    <h2>計算結果</h2>
+    <p>総支出: <span id="totalExpense">0</span> 円</p>
+    <p>保険・税金等控除額: <span id="deductions">0</span> 円</p>
+    <p>貯蓄: <span id="remaining">0</span> 円</p>
+    <p>年間貯蓄額: <span id="annualSavings">0</span> 円</p>
+    <p id="warningMessage" class="warning hidden"></p>
+    <p id="adviceMessage" class="advice hidden"></p>
+
+</div>
+
+        </div>
+
+        <div class="chart-container">
+            <canvas id="expenseChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="incomeExpenseChart"></canvas>
+        </div>
+    </div>
+
+    <script defer src="script.js"></script>
+</body>
+
+</html>
+
